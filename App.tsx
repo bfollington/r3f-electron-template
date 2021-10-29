@@ -1,3 +1,4 @@
+import { Stats } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useRef, useState } from "react";
 import * as THREE from "three";
@@ -36,6 +37,7 @@ export function App() {
         <pointLight position={[-10, -10, -10]} />
         <Box position={[-1.2, 0, 0]} />
         <Box position={[1.2, 0, 0]} />
+        <Stats />
       </Canvas>
     </div>
   );

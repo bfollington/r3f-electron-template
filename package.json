@@ -1,7 +1,7 @@
 {
   "name": "parcel-template",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "public/electron.js",
   "license": "MIT",
   "dependencies": {
     "@react-three/drei": "^7.19.1",
@@ -11,13 +11,23 @@
     "three": "^0.134.0"
   },
   "scripts": {
-    "start": "parcel",
-    "build": "parcel build"
+    "start": "parcel index.html",
+    "build": "parcel build",
+    "electron:start": "concurrently -k \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:1234 && electronmon .\"",
+    "electron:package:mac": "yarn build && electron-builder -m -c.extraMetadata.main=build/electron.js",
+    "electron:package:win": "yarn build && electron-builder -w -c.extraMetadata.main=build/electron.js",
+    "electron:package:linux": "yarn build && electron-builder -l -c.extraMetadata.main=build/electron.js"
   },
   "devDependencies": {
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "@types/three": "^0.133.1",
-    "parcel": "^2.0.0"
+    "concurrently": "^6.3.0",
+    "cross-env": "^7.0.3",
+    "electron": "^15.3.0",
+    "electron-builder": "^22.13.1",
+    "electronmon": "^2.0.2",
+    "parcel": "^2.0.0",
+    "wait-on": "^6.0.0"
   }
 }
